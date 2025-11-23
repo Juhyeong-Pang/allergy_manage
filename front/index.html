@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Allergy Group Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- 멤버 리스트 영역 -->
+        <div class="member-list">
+            <h2>Members</h2>
+        
+            <div id="member-container">
+            <!-- JS로 멤버 카드가 여기에 삽입됨 -->
+            </div>
+
+            <div id="button-group">
+                <button class="add-member-btn" id="addMemberBtn">+</button>
+                <button class="clear-btn" id="clearBtn">Reset</button>
+            </div>
+        </div>
+        
+        <!-- 오른쪽 메인 표시 영역 -->
+        <div class="main-panel">
+            <div class="right-panel">
+                <h1>Group Allergy Recommender</h1>
+
+                <div class="tabs">
+                <button class="tab-button active" data-tab="foods">Foods</button>
+                <button class="tab-button" data-tab="allergies">Allergies</button>
+                </div>
+
+                <div id="tab-content">
+                <!-- This will be replaced by JavaScript -->
+                <p>Loading...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- ✨ 멤버 편집 팝업 -->
+    <div class="modal" id="memberModal">
+        <div class="modal-content">
+          
+            <button class="close-btn" id="closeModal">✕</button>
+            
+            <label>Name</label>
+            <input id="nameInput" type="text" />
+        
+            <div class="allergy-box">
+            <h3>Allergies</h3>
+            <div class="allergy-list">
+                <!-- 알러지 예시-->
+                <label><input type="checkbox" value="Milk"> Milk</label>
+                <label><br><input type="checkbox" value="Peanut"> Peanut</label>
+                <label><br><input type="checkbox" value="Egg"> Egg</label>
+                <label><br><input type="checkbox" value="Shellfish"> Shellfish</label>
+                <label><br><input type="checkbox" value="Soy"> Soy</label>
+                <label><br><input type="checkbox" value="Soy"> Soy</label>
+                <label><br><input type="checkbox" value="Soy"> Soy</label>
+                <label><br><input type="checkbox" value="Soy"> Soy</label>
+            </div>
+            </div>
+        
+            <div class="modal-footer">
+            <button id="saveMember">Save</button>
+            <button id="cancelMember">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
