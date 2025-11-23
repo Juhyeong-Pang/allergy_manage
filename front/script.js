@@ -129,7 +129,7 @@ async function clearDatabase() {
     });
 
     if (!res.ok) {
-      const text = await res.text();
+      const text = await res.text(); // If server returns HTML or error text
       console.error("Server returned error:", text);
       throw new Error("Failed to clear database");
     }
@@ -137,10 +137,8 @@ async function clearDatabase() {
     const result = await res.json();
     console.log(result.message, "Deleted rows:", result.deletedRows);
 
-    // 화면 갱신
+    // Refresh the members list from the database
     await renderMembers();
-    await updateActiveTab();
-
   } catch (err) {
     console.error("데이터베이스 초기화 실패:", err);
   }

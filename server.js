@@ -1,61 +1,80 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
 const bodyParser = require("body-parser");
 const app = express();
+
+const mysql = require("mysql2/promise");
+require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(express.static("front"));
 
-const db = new sqlite3.Database("./sql.db");
 
-db.run(`CREATE TABLE IF NOT EXISTS people (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    allergies TEXT
-    )
-`);
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,       // e.g., 'your-db-host.aivencloud.com'
+  user: process.env.DB_USER,       // your DB username
+  password: process.env.DB_PASSWORD, // your DB password
+  database: process.env.DB_NAME,   // the database name you created
+  port: process.env.DB_PORT,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
-app.post("/addPerson", (req, res) => {
-    const { name, allergies } = req.body;
-    const allergiesJson = JSON.stringify(allergies);
+(async () => {
+  try {
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS people (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255),
+        allergies JSON
+      )
+    `;
+    await pool.query(createTableQuery);
+    console.log("Table 'people' is ready");
+  } catch (err) {
+    console.error("Error creating table:", err);
+  }
+})();
 
-    db.run(
-        "INSERT INTO people (name, allergies) VALUES (?, ?)",
-        [name, allergiesJson],
-        function (err) {
-            if (err) {
-                console.error("DB insert error:", err); // <-- log the actual error
-                return res.status(500).json({ error: err.message });
-            }
-
-            res.json({ id: this.lastID, name, allergies });
-        }
+app.post("/addPerson", async (req, res) => {
+  const { name, allergies } = req.body;
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO people (name, allergies) VALUES (?, ?)",
+      [name, JSON.stringify(allergies)]
     );
+    res.json({ id: result.insertId, name, allergies });
+  } catch (err) {
+    console.error("DB insert error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.get("/people", (req, res) => {
-    db.all("SELECT * FROM people", [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
+app.get("/people", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM people");
+    
+    const formatted = rows.map(row => ({
+      id: row.id,
+      name: row.name,
+      allergies: Array.isArray(row.allergies) ? row.allergies : [],
+    }));
 
-        // JSON 문자열을 진짜 배열로 변환
-        const formatted = rows.map(row => ({
-            id: row.id,
-            name: row.name,
-            allergies: JSON.parse(row.allergies || "[]")
-        }));
-
-        res.json(formatted);
-    });
+    res.json(formatted);
+  } catch (err) {
+    console.error("DB fetch error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.delete("/clearPeople", (req, res) => {
-    db.run("DELETE FROM people", [], function(err) {
-        if (err) {
-            console.error("DB clear error:", err);
-            return res.status(500).json({ error: err.message });
-        }
-        res.json({ message: "Database cleared", deletedRows: this.changes });
-    });
+app.delete("/clearPeople", async (req, res) => {
+  try {
+    const [result] = await pool.query("DELETE FROM people");
+    res.json({ message: "Database cleared", deletedRows: result.affectedRows });
+  } catch (err) {
+    console.error("DB clear error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
