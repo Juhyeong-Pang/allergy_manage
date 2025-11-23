@@ -53,7 +53,8 @@ async function renderMembers() {
   members.forEach((m, i) => {
     const div = document.createElement("div");
     div.classList.add("member-card");
-    div.innerHTML = `<strong>${m.name}</strong><br>${m.allergies.join(", ")}`;
+    div.innerHTML = `<strong class="member-name">${m.name}</strong><br>
+    <span class="member-allergy">${m.allergies.join(", ")}</span>`;
     div.onclick = () => {
       editingIndex = i;
       openModal(m);

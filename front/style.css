@@ -1,9 +1,16 @@
- body, html {
-    font-family: sans-serif;
+  body, html {
+    font-family: Monospace;
     overflow: hidden; /* prevents scrolling */
-    height: 100%;     /* ensures full height */
+    height: 100%;
+    width: 100%;     /* ensures full height */
     margin: 0;        /* removes default body margin */
-}
+    background-color: #FFFFFF;
+    background-image: url("./background.png");
+    background-size: cover;       /* cover entire viewport */
+    background-position: center;  /* center the image */
+    background-repeat: no-repeat; /* don't tile */
+    
+  }
   
   .container {
     display: flex;
@@ -11,11 +18,21 @@
     padding: 20px;
     gap: 20px;
   }
+  #nameInputLabel {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  #nameInput {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
   
   /* 좌측 멤버 리스트 */
   .member-list {
     width: 35%;
-    background: #f5f5f500;
+    background: #ffffff50;
     border-radius: 10px;
     padding: 20px;
 
@@ -25,6 +42,7 @@
   
   .member-card {
     background: #A87142;
+    height: 50px;
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 12px;
@@ -38,7 +56,7 @@
   }
 
   .member-card:hover {
-    background: #cfcfcf;
+    background: #a4652d;
   }
 
   #button-group {
@@ -61,21 +79,34 @@
   .add-member-btn {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 30%;
     border: none;
-    font-size: 24px;
+    font-size: 40px;
     cursor: pointer;
-    background: #dcdcdc;
+    background: #A87142;
+    color:#ffffff;
+  }
+  
+  .member-name {
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .member-allergy {
+    font-size: 15px;
+    font-weight: 500;
   }
 
   .clear-btn {
-    width: 50px;
-    height: 30px;
+    width: 60px;
+    height: 40px;
     border-radius: 10%;
     border: none;
-    font-size: 12px;
+    font-size: 15px;
     cursor: pointer;
-    background: #dcdcdc;
+    background: #A87142;
+    font-weight: 600;
+    color: #503200;
   }
   
   /* 오른쪽 메인 영역 */
@@ -211,7 +242,7 @@
   }
   
   .modal-content {
-    background: #e3e3e3;
+    background: #A87142;
     width: 350px;
     padding: 20px;
     border-radius: 15px;
@@ -228,7 +259,6 @@
   }
   
   .allergy-box {
-    background: #b0b0b0;
     padding: 10px;
     border-radius: 10px;
     margin-top: 15px;
@@ -253,12 +283,13 @@
     display: inline-block;
     padding: 8px 12px;
     font-size: 16px;
-    background-color: #999999;
+    background-color: #A87142;
     border-radius: 12px;
-    border: 1px solid #808080;       /* optional border */
+    border: 1px solid #000000;       /* optional border */
     white-space: normal;
     overflow-wrap: break-word;
     margin: 3px;
+    font-weight: 500;
 
 }
   
