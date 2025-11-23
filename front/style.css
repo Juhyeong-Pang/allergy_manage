@@ -9,7 +9,6 @@
     background-size: cover;       /* cover entire viewport */
     background-position: center;  /* center the image */
     background-repeat: no-repeat; /* don't tile */
-    
   }
   
   .container {
@@ -138,7 +137,7 @@
   
   /* 오른쪽 메인 영역 */
   .main-panel {
-    width: 70%;
+    width: 59%;
     background: #FFFFFF;
     border: 3px solid #89644E;
     border-radius: 10px;
