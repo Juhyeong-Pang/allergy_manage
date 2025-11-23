@@ -1,6 +1,9 @@
-body {
+ body, html {
     font-family: sans-serif;
-  }
+    overflow: hidden; /* prevents scrolling */
+    height: 100%;     /* ensures full height */
+    margin: 0;        /* removes default body margin */
+}
   
   .container {
     display: flex;
@@ -78,8 +81,13 @@ body {
   /* 오른쪽 메인 영역 */
   .main-panel {
     width: 65%;
-    background: #e4e4e4;
+    background: #c7c7c7;
     border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
   }
 
   .right-panel {
@@ -87,6 +95,9 @@ body {
     margin: 0 auto;
     padding: 16px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
     /* Title */ 
@@ -96,7 +107,10 @@ body {
 
     /* Tabs area */
   .tabs {
-    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;   /* center the tab buttons */
+    gap: 8px;
+    width: 100%;
   }
 
     /* Tab buttons */
@@ -110,6 +124,11 @@ body {
 
     /* Active tab */
   .tab-button.active {
+    padding: 8px 12px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
     font-weight: bold;
     border-bottom: 2px solid #333;
   }
@@ -117,21 +136,29 @@ body {
     /* Tab content container */
   #tab-content {
     margin-top: 16px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* center inner content (food cards, allergies) */
+    width: 100%;
   }
 
     /* Food cards layout */
   .food-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;   /* center the cards */
     gap: 12px;
-  }
-
+    width: 100%;
+  }  
     /* Single food card */
   .food-card {
-    border: 1px solid #ddd;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 4px;
     padding: 8px;
-    width: 200px;
+    flex: 1 1 200px;  /* flex-grow, flex-shrink, base width */
     box-sizing: border-box;
   }
 
@@ -156,8 +183,6 @@ body {
   }
 
 
-
-  
   /* 모달 */
   .modal {
     display: none; /* JS에서 block으로 변경 */
@@ -198,6 +223,28 @@ body {
     overflow-y: auto;
     padding-left: 5px;
   }
+  
+  /* Container holds all allergy items */
+.current_allergy_container {
+    display: flex;
+    flex-wrap: wrap;   /* wrap items to next line if needed */
+    gap: 8px;          /* spacing between items */
+    padding: 10px;
+}
+
+/* Each allergy text is an item */
+.current_allergy_item {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #999999;
+    border-radius: 12px;
+    border: 1px solid #808080;       /* optional border */
+    white-space: normal;
+    overflow-wrap: break-word;
+    margin: 3px;
+
+}
   
   .modal-footer {
     margin-top: 20px;

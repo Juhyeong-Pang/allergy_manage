@@ -11,6 +11,14 @@ const clearBtn = document.getElementById("clearBtn");
 
 window.addEventListener("DOMContentLoaded", async () => {
     await renderMembers();
+    await updateTabData(); // wait until foods and allergies tab content are ready
+
+    // Show content for the active tab
+    const activeButton = document.querySelector('.tab-button.active');
+    if (activeButton) {
+        const tabName = activeButton.getAttribute('data-tab');
+        tabContent.innerHTML = tabData[tabName] || "No content.";
+    }
 });
 
 addMemberBtn.addEventListener("click", () => {
@@ -77,7 +85,7 @@ async function addPerson(data) {
   }
 }
 
-saveBtn.addEventListener("click", async () => {  // make async
+saveBtn.addEventListener("click", async () => {
   const name = nameInput.value;
   const allergies = Array.from(document.querySelectorAll(".allergy-list input"))
     .filter(el => el.checked)
@@ -85,10 +93,11 @@ saveBtn.addEventListener("click", async () => {  // make async
 
   const data = { name, allergies };
 
-  addPerson(data);
+  await addPerson(data);
   modal.style.display = "none";
 
-  await renderMembers(); // await here
+  await renderMembers();
+  await updateActiveTab();   // <-- refresh allergies tab
 });
 
 async function loadMembers() {
@@ -129,8 +138,155 @@ async function clearDatabase() {
 
     // 화면 갱신
     await renderMembers();
+    await updateActiveTab();
 
   } catch (err) {
     console.error("데이터베이스 초기화 실패:", err);
+  }
+}
+
+/* Right Panel */
+
+// Select all tab buttons and the tab content container
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContent = document.getElementById('tab-content');
+
+async function updateActiveTab() {
+    await updateTabData();
+
+    const activeButton = document.querySelector('.tab-button.active');
+    if (!activeButton) return;
+
+    const tabName = activeButton.getAttribute('data-tab');
+    tabContent.innerHTML = tabData[tabName] || "No content.";
+}
+
+async function getAllergyList() {
+  const peopleList = await loadMembers();
+
+  let allergyList = [];
+
+  peopleList.forEach(row => {
+      allergyList.push(...row.allergies);
+  });
+
+  let uniqueAllergies = [...new Set(allergyList)];
+
+  return uniqueAllergies;
+}
+
+async function renderAllergiesTab() {
+    const allergiesList = await getAllergyList();
+
+    if (allergiesList.length === 0) {   // check if array is empty
+        return "<p>No Allergies</p>";
+    }
+
+    return `
+        <div class="current_allergy_container">
+            ${allergiesList.map(a => `
+                <div class="current_allergy_item">${a}</div>
+            `).join("")}
+        </div>
+    `;
+}
+
+async function renderFoodsTab() {
+    const allergiesList = await getAllergyList();
+    const foodJson = await fetchJSONData("foods.json");
+
+    if (!foodJson) {
+        console.error("Could not load foods.json");
+        return "<p>Food list unavailable.</p>";
+    }
+
+    let safeFoods = [];
+
+    Object.keys(foodJson).forEach(foodName => {
+        const ingredientList = foodJson[foodName].ingredients;
+
+        // Check if any ingredient matches allergies
+        const hasConflict = ingredientList.some(ing =>
+            allergiesList.includes(ing)
+        );
+
+        if (hasConflict) return;  // skip unsafe food (same as continue)
+
+        safeFoods.push({
+            name: foodName,
+            image: foodJson[foodName].image_url,
+            ingredients: ingredientList
+        });
+    });
+
+    if (safeFoods.length === 0) {
+        return "<p>No safe foods available.</p>";
+    }
+
+    // Render with your CSS card layout
+    return `
+        <div class="food-list">
+            ${safeFoods
+                .map(
+                    f => `
+                    <div class="food-card">
+                        <img src="${f.image}" class="food-image">
+                        <div class="food-info">
+                            <strong>${f.name}</strong>
+                            <div class="food-allergy-text">
+                                Ingredients: ${f.ingredients.join(", ")}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+                .join("")}
+        </div>
+    `;
+}
+
+// Sample content for each tab
+let tabData = {
+    foods: `Food List is empty`,
+    allergies: "No Allergies!"
+}
+
+async function updateTabData() {
+  tabData = {
+    foods: await renderFoodsTab(),
+    allergies: await renderAllergiesTab()
+  }; 
+}
+
+// Function to switch tabs
+tabButtons.forEach(async (button) => {
+    await updateTabData(); // if you want to update tab data first
+
+    button.addEventListener('click', async () => {  // make inner function async if needed
+        // Remove 'active' class from all buttons
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add 'active' class to the clicked button
+        button.classList.add('active');
+
+        // Get the tab name from data-tab attribute
+        const tabName = button.getAttribute('data-tab');
+
+        // Update tab content
+        tabContent.innerHTML = tabData[tabName] || "No Allergies!";
+    });
+});
+
+async function fetchJSONData(filePath) {
+  try {
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json(); // Parses the JSON response into a JavaScript object
+    console.log(data); // Work with the JSON data
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch JSON data:', error);
   }
 }

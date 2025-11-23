@@ -1,0 +1,1394 @@
+import json
+
+recipes = {
+    "African Stew": {
+        "ingredients": [
+            "Chicken", "Onion", "Garlic", "Ginger",
+            "Tomato", "Carrot", "Bell pepper", "Peanut"
+        ],
+        "image_url": "https://seasonandthyme.com/wp-content/uploads/2024/01/african-beef-stew-plated.jpg"
+    },
+
+    "Alfredo Pasta": {
+        "ingredients": [
+            "Wheat", "Dairy", "Garlic"
+        ],
+        "image_url": "https://midwestfoodieblog.com/wp-content/uploads/2023/07/chicken-alfredo-1.jpg"
+    },
+
+    "American Breakfast": {
+        "ingredients": [
+            "Eggs", "Pork", "Potato", "Wheat"
+        ],
+        "image_url": "https://rachelscaferi.com/wp-content/uploads/american-style-breakfast.jpg"
+    },
+
+    "Apple Pie": {
+        "ingredients": [
+            "Apple", "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://ohsweetbasil.com/wp-content/uploads/classic-apple-pie-recipe-10-1.jpg"
+    },
+
+    "Avocado Toast": {
+        "ingredients": [
+            "Avocado", "Wheat", "Eggs"
+        ],
+        "image_url": "https://feelgoodfoodie.net/wp-content/uploads/2025/05/Avocado-Toast-10-500x500.jpg"
+    },
+
+    "Asian Stir-Fry": {
+        "ingredients": [
+            "Soy", "Wheat", "Garlic", "Onion", "Bell pepper"
+        ],
+        "image_url": "https://www.allrecipes.com/thmb/xvlRRhK5ldXuGcXad8XDM5tTAfE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/223382_chicken-stir-fry_Rita-1x1-1-b6b835ccfc714bb6a8391a7c47a06a84.jpg"
+    },
+
+    "Arepas": {
+        "ingredients": [
+            "Corn", "Cheese"
+        ],
+        "image_url": "https://static01.nyt.com/images/2023/10/06/multimedia/RM-arepas-zplk/RM-arepas-zplk-threeByTwoLargeAt2X-v4.jpg"
+    },
+
+    "Arroz con Pollo": {
+        "ingredients": [
+            "Chicken", "Rice", "Tomato", "Onion", "Bell pepper", "Garlic"
+        ],
+        "image_url": "https://www.foodandwine.com/thmb/hjlx6unjT9pd34SIyomTPvvqBjM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/arroz-con-pollo-FT-RECIPE0325-01fe1591a324471f9f26f309b778300c.jpg"
+    },
+
+    "Antipasto Salad": {
+        "ingredients": [
+            "Cheese", "Tomato", "Olives", "Peppers", "Turkey"
+        ],
+        "image_url": "https://cookeatpaleo.com/wp-content/uploads/2020/08/antipasto-salad-cook-eat-well.jpg"
+    },
+
+    "Aglio e Olio": {
+        "ingredients": [
+            "Wheat", "Garlic", "Red pepper"
+        ],
+        "image_url": "https://kiipfit.com/wp-content/uploads/2020/03/spaghetti-aoli3.1.jpg"
+    },
+
+    "Bagel with Cream Cheese": {
+        "ingredients": [
+            "Wheat", "Dairy"
+        ],
+        "image_url": "https://popmenucloud.com/cdn-cgi/image/width=1920,height=1920,format=auto,fit=scale-down/doehsnfq/bf34309f-f999-4a84-9ef3-adb395e09898.png"
+    },
+
+    "Baked Salmon": {
+        "ingredients": [
+            "Fish", "Garlic", "Lemon", "Pepper"
+        ],
+        "image_url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/12/20/0/FNK_Baked-Salmon_H_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1576855635102.webp"
+    },
+
+    "Banana Bread": {
+        "ingredients": [
+            "Banana", "Wheat", "Eggs", "Dairy"
+        ],
+        "image_url": "https://www.allrecipes.com/thmb/fAkQn-FhjF89oTJ5JXpgwvwNf34=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20144-banana-banana-bread-VAT-009-4x3-B-78f1cfc64bfa451e8a0fead814719b9f.jpg"
+    },
+
+    "BBQ Ribs": {
+        "ingredients": [
+            "Pork", "Tomato", "Garlic"
+        ],
+        "image_url": "https://mccormick.widen.net/content/eh1wpytjiy/webp/Franks%20RedHot%20Smokin%20Sweet%20BBQ%20Ribs-1376x774.webp?crop=true&anchor=0,0&color=ffffffff&u=eelhgb&w=1376&h=774"
+    },
+
+    "Beef Stew": {
+        "ingredients": [
+            "Beef", "Potato", "Carrot", "Onion", "Celery"
+        ],
+        "image_url": "https://kristineskitchenblog.com/wp-content/uploads/2023/12/instant-pot-beef-stew-06-3.jpg"
+    },
+
+    "Beef Tacos": {
+        "ingredients": [
+            "Beef", "Corn", "Tomato", "Lettuce", "Cheese"
+        ],
+        "image_url": "https://www.thecookingtwins.com/wp-content/uploads/2025/09/authentic-mexican-ground-beef-taco-recipe-featured.webp"
+    },
+
+    "Bibimbap": {
+        "ingredients": [
+            "Eggs", "Beef", "Spinach", "Carrot", "Mushroom"
+        ],
+        "image_url": "https://takestwoeggs.com/wp-content/uploads/2025/05/Overhead-Bibimbap-Korean-Rice-Bowl.webp"
+    },
+
+    "BLT Sandwich": {
+        "ingredients": [
+            "Wheat", "Tomato", "Lettuce", "Pork"
+        ],
+        "image_url": "https://dyvn6jpt1f0d3.cloudfront.net/wp-content/uploads/2023/10/14154227/BLT-for-recipe-1-6-1200x675.jpeg"
+    },
+
+    "Brisket": {
+        "ingredients": [
+            "Beef", "Garlic", "Onion"
+        ],
+        "image_url": "https://www.certifiedangusbeef.com/_next/image?url=https%3A%2F%2Fappetizing-cactus-7139e93734.media.strapiapp.com%2FTexas_Style_Smoked_Brisket_a2efa3b0d4.jpeg&w=1920&q=75"
+    },
+
+    "Burrito": {
+        "ingredients": [
+            "Wheat", "Rice", "Beans", "Beef", "Tomato", "Onion"
+        ],
+        "image_url": "https://embed.widencdn.net/img/beef/hpmyvvgxd4/1120x840px/Beef%20Breakfast%20Burritos_2?keep=c&u=7fueml"
+    },
+
+    "Caesar Salad": {
+        "ingredients": [
+            "Dairy", "Eggs", "Lettuce", "Garlic", "Wheat"
+        ],
+        "image_url": "https://cdn.loveandlemons.com/wp-content/uploads/2024/12/caesar-salad.jpg"
+    },
+
+    "Calzone": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato"
+        ],
+        "image_url": "https://www.allrecipes.com/thmb/Bwkz2gVOQUJcPYSzOJgD94XDi5Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/18874-Real-Italian-Calzones-ddmfs-127-4x3-1-a30a0e72801f42bcb0643ed4b57e8a3c.jpg"
+    },
+
+    "Carbonara": {
+        "ingredients": [
+            "Wheat", "Eggs", "Pork", "Dairy", "Black pepper"
+        ],
+        "image_url": "https://littlespoonfarm.com/wp-content/uploads/2024/07/Pasta-Carbonara-Recipe.jpg"
+    },
+
+    "Carne Asada": {
+        "ingredients": [
+            "Beef", "Lime", "Garlic", "Onion", "Cilantro"
+        ],
+        "image_url": "https://www.munchkintime.com/wp-content/uploads/2025/01/The-Best-Carne-Asada-Marinade-Recipe-9.jpg"
+    },
+
+    "Casserole": {
+        "ingredients": [
+            "Dairy", "Wheat", "Chicken", "Onion", "Mushroom"
+        ],
+        "image_url": "https://hips.hearstapps.com/hmg-prod/images/easy-casserole-recipes-king-ranch-chicken-687527f392fca.jpg?crop=1xw:1xh;center,top"
+    },
+
+    "Cheeseburger": {
+        "ingredients": [
+            "Beef", "Dairy", "Wheat", "Tomato", "Onion"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2016/ClassicCheeseBurger_9.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1749310239&s=463b18fc3bb51dc5d96e866c848527c4"
+    },
+
+    "Chicken Alfredo": {
+        "ingredients": [
+            "Chicken", "Dairy", "Wheat", "Garlic"
+        ],
+        "image_url": "https://gimmedelicious.com/wp-content/uploads/2024/10/Skinny-Chicken-Broccoli-Alfredo-1.jpg"
+    },
+
+    "Chicken Noodle Soup": {
+        "ingredients": [
+            "Chicken", "Wheat", "Carrot", "Celery", "Onion"
+        ],
+        "image_url": "https://disheswithdad.com/wp-content/uploads/2019/11/4F6E60AE-84AF-47B2-A527-23E3AC9771B2-scaled.jpeg"
+    },
+
+    "Chicken Parmesan": {
+        "ingredients": [
+            "Chicken", "Wheat", "Dairy", "Tomato"
+        ],
+        "image_url": "https://assets.bonappetit.com/photos/5ea8f0df16738800085ad5d2/1:1/w_2560%2Cc_limit/Chicken-Parmesean-Recipe-Lede.jpg"
+    },
+
+    "Chicken Tikka Masala": {
+        "ingredients": [
+            "Chicken", "Dairy", "Tomato", "Garlic", "Ginger"
+        ],
+        "image_url": "https://www.seriouseats.com/thmb/DbQHUK2yNCALBnZE-H1M2AKLkok=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tikka-masala-for-the-grill-recipe-hero-2_1-cb493f49e30140efbffec162d5f2d1d7.JPG"
+    },
+
+    "Chili": {
+        "ingredients": [
+            "Beef", "Tomato", "Onion", "Red pepper"
+        ],
+        "image_url": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2023/09/Chili-7.jpg"
+    },
+
+    "Chimichanga": {
+        "ingredients": [
+            "Wheat", "Beef", "Cheese", "Tomato", "Onion"
+        ],
+        "image_url": "https://www.lemontreedwelling.com/wp-content/uploads/2021/02/chimichangas-featured.jpg"
+    },
+
+    "Chocolate Cake": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs", "Cocoa"
+        ],
+        "image_url": "https://fooddoodles.com/wp-content/uploads/2019/09/healthy-chocolate-cake-1200.jpg"
+    },
+
+    "Clam Chowder": {
+        "ingredients": [
+            "Shellfish", "Dairy", "Potato", "Onion", "Celery"
+        ],
+        "image_url": "https://cookanyday.com/cdn/shop/files/anyday-photos-recipes-whole-clam-chowder-with-bacon-1040-66a9633ed6958.webp?v=1722377079"
+    },
+
+    "Club Sandwich": {
+        "ingredients": [
+            "Wheat", "Turkey", "Tomato", "Lettuce"
+        ],
+        "image_url": "https://www.kimschob.com/wp-content/uploads/2024/04/Club-Sandwich-with-Turkey-and-Bacon.jpg"
+    },
+
+    "Cobb Salad": {
+        "ingredients": [
+            "Eggs", "Chicken", "Tomato", "Avocado", "Cheese"
+        ],
+        "image_url": "https://www.herwholesomekitchen.com/wp-content/uploads/2021/02/cobbsaladrecipe-1.jpg"
+    },
+
+    "Cornbread": {
+        "ingredients": [
+            "Corn", "Eggs", "Dairy"
+        ],
+        "image_url": "https://thereisfoodathome.com/wp-content/uploads/2024/11/Jiffy-Cornbread-Recipe-6.jpg"
+    },
+
+    "Crepes": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy", "strawberry"
+        ],
+        "image_url": "https://www.afarmgirlsdabbles.com/wp-content/uploads/2023/04/French-crepes-afarmgirlsdabbles-01s.jpg"
+    },
+
+    "Curry Rice": {
+        "ingredients": [
+            "Rice", "Chicken", "Curry powder", "Onion", "Carrot"
+        ],
+        "image_url": "https://www.maangchi.com/wp-content/uploads/2015/08/50902.jpg"
+    },
+
+    "Custard": {
+        "ingredients": [
+            "Dairy", "Eggs"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2018/01/Get-Well-Custard_EXPS_FT24_4151_JR_0717_1.jpg"
+    },
+
+"Dal Curry": {
+        "ingredients": [
+            "Legumes", "Onion", "Garlic", "Ginger", "Turmeric"
+        ],
+        "image_url": "https://www.masalaherb.com/wp-content/uploads/2025/01/Goan-Masoor-Dal-gog-2-1200.jpg"
+    },
+
+    "Danish Pastry": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://sugargeekshow.com/wp-content/uploads/2022/08/1200cheese_danish.jpg"
+    },
+
+    "Deviled Eggs": {
+        "ingredients": [
+            "Eggs", "Mustard"
+        ],
+        "image_url": "https://www.familyfoodonthetable.com/wp-content/uploads/2023/11/Moms-classic-southern-deviled-eggs-1200-6.jpg"
+    },
+
+    "Dim Sum": {
+        "ingredients": [
+            "Wheat", "Pork", "Shrimp", "Eggs"
+        ],
+        "image_url": "https://www.riolasvegas.com/wp-content/uploads/2024/12/Dim-sum.png"
+    },
+
+    "Donburi": {
+        "ingredients": [
+            "Rice", "Eggs", "Chicken", "Onion"
+        ],
+        "image_url": "https://iheartumami.com/wp-content/uploads/2019/10/Chicken-donburi-recipe.jpg"
+    },
+
+    "Donuts": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://static01.nyt.com/images/2024/11/24/multimedia/Classic-Glazed-Donutsrex-kpzb/Classic-Glazed-Donutsrex-kpzb-mediumSquareAt3X.jpg"
+    },
+
+    "Dumplings": {
+        "ingredients": [
+            "Wheat", "Pork", "Garlic", "Onion"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2021/11/Homemade-Pork-Dumplings_EXPS_HCA24_265389_DR_11_30_6b.jpg"
+    },
+
+    "Dutch Baby Pancake": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy"
+        ],
+        "image_url": "https://onedishkitchen.com/wp-content/uploads/2021/09/apple-dutch-baby-one-dish-kitchen-square-1200-1.jpg"
+    },
+
+    "Deli Sandwich": {
+        "ingredients": [
+            "Wheat", "Turkey", "Tomato", "Lettuce"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2023-09-turkey-sandwich%2Fturkey-sandwich-814"
+    },
+
+    "Duck Confit": {
+        "ingredients": [
+            "Duck", "Garlic"
+        ],
+        "image_url": "https://www.recipetineats.com/tachyon/2021/06/Duck-Confit-photo-_8-SQ.jpg"
+    },
+
+    "Egg Fried Rice": {
+        "ingredients": [
+            "Rice", "Eggs", "Soy", "Carrot", "Peas"
+        ],
+        "image_url": "https://www.cookerru.com/wp-content/uploads/2022/07/egg-fried-rice-main-preview.jpg"
+    },
+
+    "Eggplant Parmesan": {
+        "ingredients": [
+            "Eggplant", "Dairy", "Wheat", "Tomato"
+        ],
+        "image_url": "https://www.allrecipes.com/thmb/24bDkG1DNBqvYG4aalHoL2tKoYE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8963090-cc3a782cc244447197353a57fb0461b5.jpg"
+    },
+
+    "Empanadas": {
+        "ingredients": [
+            "Wheat", "Beef", "Onion"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2022/02/Chilean-Beef-Empanadas-_EXPS_RC21_265384_E10_28_3b.jpg"
+    },
+
+    "Enchiladas": {
+        "ingredients": [
+            "Corn", "Cheese", "Chicken", "Tomato"
+        ],
+        "image_url": "https://www.cucinabyelena.com/wp-content/uploads/2025/07/Enchiladas-Rojas-Red-Enchiladas-Recipe-19.jpg"
+    },
+
+    "English Breakfast": {
+        "ingredients": [
+            "Eggs", "Pork", "Tomato", "Mushroom"
+        ],
+        "image_url": "https://delishglobe.com/wp-content/uploads/2025/09/Full-English-Breakfast-Hearty-Morning-Platter.png"
+    },
+
+    "Ethiopian Lentil Stew": {
+        "ingredients": [
+            "Legumes", "Garlic", "Onion", "Ginger"
+        ],
+        "image_url": "https://holycowvegan.net/wp-content/uploads/2023/02/ethiopian-lentil-stew-recipe-1.jpg"
+    },
+
+    "Espresso Tiramisu": {
+        "ingredients": [
+            "Dairy", "Eggs", "Wheat"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyCuTOaH5mKTrIxkidu2HzENlhXmAZ3lTyw&s"
+    },
+
+    "Egg Drop Soup": {
+        "ingredients": [
+            "Eggs", "Chicken", "Soy"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2024-09-egg-drop-soup%2Fegg-drop-soup-3561"
+    },
+
+    "Elote Corn": {
+        "ingredients": [
+            "Corn", "Dairy"
+        ],
+        "image_url": "https://howtofeedaloon.com/wp-content/uploads/2025/08/Elote-Easy-Mexican-Street-Corn-IG.jpg"
+    },
+
+    "Eel Rice Bowl": {
+        "ingredients": [
+            "Rice", "Fish", "Soy"
+        ],
+        "image_url": "https://www.chopstickchronicles.com/wp-content/uploads/2023/06/Unadon-12.jpg"
+    },
+
+"Falafel": {
+        "ingredients": [
+            "Legumes", "Garlic", "Onion", "Cumin"
+        ],
+        "image_url": "https://www.lemonblossoms.com/wp-content/uploads/2025/01/Falafel-S2.jpg"
+    },
+
+    "Fettuccine Alfredo": {
+        "ingredients": [
+            "Wheat", "Dairy", "Garlic"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2025-01-fettucini-alfredo%2FFettuccine-Alfredo-0771_ead026-crop"
+    },
+
+    "Fish and Chips": {
+        "ingredients": [
+            "Fish", "Wheat", "Potato"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2022/FishandChips_11.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1672266407&s=b0bcbcb33bdd0b65955ca0a38fc43c2f"
+    },
+
+    "Fried Chicken": {
+        "ingredients": [
+            "Chicken", "Wheat", "Dairy"
+        ],
+        "image_url": "https://leitesculinaria.com/wp-content/uploads/2024/04/batter-fried-chicken-1200.jpg"
+    },
+
+    "Fried Rice": {
+        "ingredients": [
+            "Rice", "Eggs", "Soy", "Carrot", "Peas"
+        ],
+        "image_url": "https://www.eatingonadime.com/wp-content/uploads/2022/01/eod-fried-rice-9-2.jpg"
+    },
+
+    "French Fries": {
+        "ingredients": [
+            "Potato"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2022/Homemade-French-Fries_8.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1662474181&s=15046582e76b761a200998df2dcad0fd"
+    },
+
+    "French Toast": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy"
+        ],
+        "image_url": "https://onedishkitchen.com/wp-content/uploads/2019/05/french-toast-one-dish-kitchen-1200-square.jpg"
+    },
+
+    "Fruit Salad": {
+        "ingredients": [
+            "Apple", "Banana", "Grapes", "Strawberry", "Blueberry", "Melon", "Mango"
+        ],
+        "image_url": "https://lifemadesimplebakes.com/wp-content/uploads/2021/05/Red-White-and-Blue-Fruit-Salad-1200.jpg"
+    },
+
+    "Fajitas": {
+        "ingredients": [
+            "Beef", "Chicken", "Bell pepper", "Onion"
+        ],
+        "image_url": "https://feelgoodfoodie.net/wp-content/uploads/2024/08/Chicken-Fajitas-16.jpg"
+    },
+
+    "Fried Calamari": {
+        "ingredients": [
+            "Shellfish", "Wheat"
+        ],
+        "image_url": "https://www.billyparisi.com/wp-content/uploads/2025/03/calamari-2.jpg"
+    },
+
+    "Garlic Bread": {
+        "ingredients": [
+            "Wheat", "Garlic", "Dairy"
+        ],
+        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2018/11/garlic-bread-8-1200.jpg"
+    },
+
+    "Gazpacho": {
+        "ingredients": [
+            "Tomato", "Cucumber", "Garlic", "Bell pepper"
+        ],
+        "image_url": "https://www.dishbydish.net/wp-content/uploads/Gluten-Free-Gazpacho-Vegan_1200-x-1200_Featured-Image_1.jpg"
+    },
+
+    "General Tso's Chicken": {
+        "ingredients": [
+            "Chicken", "Soy", "Corn", "Garlic"
+        ],
+        "image_url": "https://bellylaughliving.com/wp-content/uploads/2024/10/Sheet-Pan-General-Tsos-Chicken-with-Cauliflower-Rice-FI-1200.jpg"
+    },
+
+    "Gnocchi": {
+        "ingredients": [
+            "Potato", "Wheat", "Dairy"
+        ],
+        "image_url": "https://www.seasonsandsuppers.ca/wp-content/uploads/2025/09/butternut-squash-gnocchi-1200-1.jpg"
+    },
+
+    "Greek Salad": {
+        "ingredients": [
+            "Tomato", "Cucumber", "Onion", "Cheese"
+        ],
+        "image_url": "https://finefoodsblog.com/wp-content/uploads/2024/08/traditional-greek-salad-1200.jpg"
+    },
+
+    "Grilled Cheese": {
+        "ingredients": [
+            "Wheat", "Dairy"
+        ],
+        "image_url": "https://www.mysequinedlife.com/wp-content/uploads/2024/02/air-fryer-grilled-cheese-1200-square-3.jpg"
+    },
+
+    "Grilled Shrimp": {
+        "ingredients": [
+            "Shellfish", "Garlic", "Lemon"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4CAp7PaZ1q1hnz0Xqbs46bYn6XKbBATBJww&s"
+    },
+
+    "Gumbo": {
+        "ingredients": [
+            "Shellfish", "Chicken", "Rice", "Onion", "Bell pepper"
+        ],
+        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2014/03/pot-of-chicken-sausage-gumbo-1200.jpg"
+    },
+
+    "Gyro": {
+        "ingredients": [
+            "Wheat", "Lamb", "Dairy", "Tomato", "Onion"
+        ],
+        "image_url": "https://bbqingwiththenolands.com/wp-content/uploads/2024/09/Chicken-Gyros-1200-x-1200.jpg"
+    },
+
+    "Granola Bowl": {
+        "ingredients": [
+            "Wheat", "Dairy", "Nuts", "Banana", "Blueberry"
+        ],
+        "image_url": "https://afullliving.com/wp-content/uploads/2022/03/Yogurt-with-Granola-1200-x-1200.png"
+    },
+
+"Hamburger": {
+        "ingredients": [
+            "Beef", "Wheat", "Tomato", "Onion", "Cheese"
+        ],
+        "image_url": "https://www.lanascooking.com/wp-content/uploads/2009/03/homestyle-burgers-1200-feature.jpg"
+    },
+
+    "Hash Browns": {
+        "ingredients": [
+            "Potato"
+        ],
+        "image_url": "https://i0.wp.com/mylifeafterdairy.com/wp-content/uploads/2025/01/Air-Fryer-Frozen-Hashbrowns-07.jpg?fit=1200%2C1200&ssl=1"
+    },
+
+    "Hawaiian Pizza": {
+        "ingredients": [
+            "Wheat", "Dairy", "Pineapple", "Pork", "Tomato"
+        ],
+        "image_url": "https://cookingformysoul.com/wp-content/uploads/2021/04/homemade-hawaiian-pizza-1200-min.jpg"
+    },
+
+    "Hot Dogs": {
+        "ingredients": [
+            "Wheat", "Pork"
+        ],
+        "image_url": "https://brooklyncured.com/cdn/shop/files/NY_Style_Hot_Dog_Mustard.jpg?v=1739841866&width=1200"
+    },
+
+    "Hummus Plate": {
+        "ingredients": [
+            "Legumes", "Garlic", "Lemon", "Sesame"
+        ],
+        "image_url": "https://www.veggiessavetheday.com/wp-content/uploads/2022/09/Hummus-Recipe-Without-Tahini-FI-1200.jpg"
+    },
+
+    "Huevos Rancheros": {
+        "ingredients": [
+            "Eggs", "Tomato", "Onion", "Corn"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/HuevoRacheros_6.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1708477029&s=dcb3c244b4184f1dbfc8f32ecda9005a"
+    },
+
+    "Honey Garlic Chicken": {
+        "ingredients": [
+            "Chicken", "Garlic", "Soy"
+        ],
+        "image_url": "https://i0.wp.com/easyeatsdietitian.com/wp-content/uploads/2023/03/Honey-Garlic-Chicken-1200-1200-.jpg?fit=1200%2C1200&ssl=1"
+    },
+
+    "Hot Pot": {
+        "ingredients": [
+            "Beef", "Pork", "Shellfish", "Fish", "Mushroom", "Soy"
+        ],
+        "image_url": "https://fullofplants.com/wp-content/uploads/2019/10/vegan-thai-hotpot-sweet-and-sour-soup-with-tofu-mushrooms-noodles-thumb-5.jpg"
+    },
+
+    "Ham and Cheese Sandwich": {
+        "ingredients": [
+            "Wheat", "Pork", "Dairy"
+        ],
+        "image_url": "https://www.beyondthechickencoop.com/wp-content/uploads/2021/02/Ham-and-Swiss-Panini.jpg"
+    },
+
+    "Home Fries": {
+        "ingredients": [
+            "Potato", "Onion"
+        ],
+        "image_url": "https://www.lanascooking.com/wp-content/uploads/2022/12/home-fries-2025-1200-feature.jpg"
+    },
+
+    "Ice Cream Sundae": {
+        "ingredients": [
+            "Dairy"
+        ],
+        "image_url": "https://inthekitch.net/wp-content/uploads/strawberry-ice-cream-sundae-featured-1.jpg"
+    },
+
+    "Indian Curry": {
+        "ingredients": [
+            "Chicken", "Tomato", "Garlic", "Ginger", "Curry powder", "Dairy"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpGgVMeAsOynRtVYnFWClhqnYMUcqVWtd7Xw&s"
+    },
+
+    "Irish Stew": {
+        "ingredients": [
+            "Beef", "Potato", "Carrot", "Onion", "Celery"
+        ],
+        "image_url": "https://www.lanascooking.com/wp-content/uploads/2016/03/irish-stew-1200-new-featured.jpg"
+    },
+
+    "Italian Wedding Soup": {
+        "ingredients": [
+            "Beef", "Eggs", "Wheat", "Spinach"
+        ],
+        "image_url": "https://www.healthyseasonalrecipes.com/wp-content/uploads/2020/03/healthy-italian-wedding-soup-1200-sq-019.jpg"
+    },
+
+    "Instant Ramen": {
+        "ingredients": [
+            "Wheat", "Soy", "Eggs"
+        ],
+        "image_url": "https://www.acedarspoon.com/wp-content/uploads/2021/03/Spicy-Ramen-Noodle-Soup-Image-1200-x-1200.jpg"
+    },
+
+    "Iced Latte Pastry": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://coffeecopycat.com/wp-content/uploads/2025/08/CarrotCakeLatte-1200x1200-1.jpg"
+    },
+
+    "Israeli Couscous Salad": {
+        "ingredients": [
+            "Wheat", "Tomato", "Cucumber", "Onion"
+        ],
+        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2019/03/israeli-couscous-8-1200.jpg"
+    },
+
+    "Iced Donuts": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://www.seasonsandsuppers.ca/wp-content/uploads/2022/03/maple-donuts-1200-1.jpg"
+    },
+
+    "Italian Sub": {
+        "ingredients": [
+            "Wheat", "Pork", "Tomato", "Lettuce", "Onion"
+        ],
+        "image_url": "https://images.unsplash.com/photo-1585238341988-79148b1d3a5c"
+    },
+
+    "Italian Sausage Pasta": {
+        "ingredients": [
+            "Wheat", "Pork", "Tomato", "Dairy"
+        ],
+        "image_url": "https://www.tastesoflizzyt.com/wp-content/uploads/2022/04/one-pot-sausage-pasta-1200.jpg"
+    },
+
+"Jambalaya": {
+        "ingredients": [
+            "Rice", "Chicken", "Pork", "Shellfish", "Bell pepper", "Onion"
+        ],
+        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2019/03/jambalaya-7-1200.jpg"
+    },
+
+    "Japanese Curry": {
+        "ingredients": [
+            "Chicken", "Potato", "Carrot", "Onion", "Wheat"
+        ],
+        "image_url": "https://pickledplum.com/wp-content/uploads/2025/06/Japanese-Curry-Hurry-1200-2.jpg"
+    },
+
+    "Jerk Chicken": {
+        "ingredients": [
+            "Chicken", "Red pepper", "Garlic", "Onion"
+        ],
+        "image_url": "https://www.kleinworthco.com/wp-content/uploads/2022/06/Jerk-Chicken-1200.jpg"
+    },
+
+    "Jelly Donut": {
+        "ingredients": [
+            "Wheat", "Dairy", "Eggs"
+        ],
+        "image_url": "https://thekmp.com/cdn/shop/products/StockHanukkahSufganiyot2_1200x1200.jpg?v=1637556185"
+    },
+
+    "Jjajangmyeon": {
+        "ingredients": [
+            "Wheat", "Pork", "Onion"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtSQiYcXwPK0hS12O4cVUZedn5hIgoqxc7iA&s"
+    },
+
+    "Jjambbong": {
+        "ingredients": [
+            "Wheat", "Shellfish", "Fish", "Pork", "Red pepper"
+        ],
+        "image_url": "https://img.cdn4dd.com/p/fit=cover,width=1200,height=1200,format=auto,quality=90/media/photosV2/2a91b15d-f3b1-4a5b-a6f7-a47b1526180e-retina-large.JPG"
+    },
+
+    "Jollof Rice": {
+        "ingredients": [
+            "Rice", "Tomato", "Onion", "Bell pepper"
+        ],
+        "image_url": "https://i0.wp.com/afrovitalityeats.com/wp-content/uploads/2017/07/Easy-Baked-Basmati-jollof-rice.jpg?resize=1200%2C1200&ssl=1"
+    },
+
+    "Juice Bowl (Smoothie Bowl)": {
+        "ingredients": [
+            "Banana", "Strawberry", "Blueberry", "Mango"
+        ],
+        "image_url": "https://img.cdn4dd.com/p/fit=cover,width=1200,height=1200,format=auto,quality=90/media/photosV2/cdd2034d-0592-4c77-bcfe-e6e14f451fd5-retina-large.png"
+    },
+
+    "Jamaican Patties": {
+        "ingredients": [
+            "Wheat", "Beef", "Onion", "Red pepper"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Jamaican_patties_and_redstripe.jpg/1200px-Jamaican_patties_and_redstripe.jpg"
+    },
+
+    "Japanese Udon": {
+        "ingredients": [
+            "Wheat", "Soy", "Fish"
+        ],
+        "image_url": "https://sudachirecipes.com/wp-content/uploads/2022/08/kake-udon-thumbnail.jpg"
+    },
+
+    "Kabobs": {
+        "ingredients": [
+            "Beef", "Chicken", "Bell pepper", "Onion"
+        ],
+        "image_url": "https://www.savorynothings.com/wp-content/uploads/2022/05/greek-chicken-kabobs-recipe-image-sq.jpg"
+    },
+
+    "Kalbi (Short Ribs)": {
+        "ingredients": [
+            "Beef", "Soy", "Garlic"
+        ],
+        "image_url": "https://mikhaeats.com/wp-content/uploads/2021/05/kalbi-korean-marinated-flanken-short-ribs-featured-image-1.jpg"
+    },
+
+    "Katsu Curry": {
+        "ingredients": [
+            "Chicken", "Wheat", "Eggs", "Curry powder"
+        ],
+        "image_url": "https://cookingwithayeh.com/wp-content/uploads/2024/10/Katsu-Curry-SQ-3.jpg"
+    },
+
+    "Korean BBQ": {
+        "ingredients": [
+            "Beef", "Pork", "Soy", "Garlic"
+        ],
+        "image_url": "https://www.honestfoodtalks.com/wp-content/uploads/2022/01/Pochawa-Grill-London-Korean-BBQ-Review.jpg"
+    },
+
+    "Kebab Wrap": {
+        "ingredients": [
+            "Wheat", "Lamb", "Tomato", "Onion", "Lettuce"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH4yGQGqBHv1mn93_GpaNe3BgOL0R9Xiyl8A&s"
+    },
+
+    "Kielbasa Sausage": {
+        "ingredients": [
+            "Pork", "Garlic"
+        ],
+        "image_url": "https://images.getrecipekit.com/20230523160503-smokedpolish.jpeg?aspect_ratio=1:1&quality=90&"
+    },
+
+    "King Crab Legs": {
+        "ingredients": [
+            "Shellfish"
+        ],
+        "image_url": "https://images.getrecipekit.com/20230508204232-sealand-colossal-king-crab-dipped-in-butter-sauce.jpg?aspect_ratio=1:1&quality=90&"
+    },
+
+    "Knish": {
+        "ingredients": [
+            "Wheat", "Potato", "Onion", "Eggs"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy2A-PVsfQWSbo9q70Nh90zkdd4Yw81w7ruA&s"
+    },
+
+    "Kung Pao Chicken": {
+        "ingredients": [
+            "Chicken", "Peanut", "Soy", "Bell pepper", "Red pepper"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBa406d2a9ysJXsZWD5AeMDM1NzIiPSFH-qQ&s"
+    },
+
+"Lasagna": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato", "Beef"
+        ],
+        "image_url": "https://freshapron.com/wp-content/uploads/2024/10/Turkey-Spinach-Lasagna-17.jpg"
+    },
+
+    "Lemon Chicken": {
+        "ingredients": [
+            "Chicken", "Garlic", "Lemon"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhMl1-UeZdEZj-OWhgSBhBIJyPx3lMM0q4w&s"
+    },
+
+    "Lobster Roll": {
+        "ingredients": [
+            "Shellfish", "Wheat", "Dairy"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi5_q5X4uOcAh-3FZoBJgyYdeiHHN1gxDnhA&s"
+    },
+
+    "Loaded Nachos": {
+        "ingredients": [
+            "Corn", "Cheese", "Tomato", "Beef"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9NV7H_EnVdISht9Csd3EeKMbnVYvqCfUfnw&s"
+    },
+
+    "Lo Mein": {
+        "ingredients": [
+            "Wheat", "Soy", "Chicken", "Bell pepper", "Onion"
+        ],
+        "image_url": "https://static01.nyt.com/images/2025/01/23/multimedia/kc-chicken-lo-mein-plated-lfpb/kc-chicken-lo-mein-plated-lfpb-mediumSquareAt3X.jpg"
+    },
+
+    "Lentil Soup": {
+        "ingredients": [
+            "Legumes", "Carrot", "Onion", "Celery"
+        ],
+        "image_url": "https://www.healthyseasonalrecipes.com/wp-content/uploads/2021/08/lentil-soup-sq-029.jpg"
+    },
+
+    "Latin Rice Bowl": {
+        "ingredients": [
+            "Rice", "Chicken", "Tomato", "Corn", "Onion"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeuacqFSrsTkrBZc6LAY5oPftKnuYmVisHQw&s"
+    },
+
+    "Lamb Chops": {
+        "ingredients": [
+            "Lamb", "Garlic"
+        ],
+        "image_url": "https://finefoodsblog.com/wp-content/uploads/2024/01/pan-seared-lamb-chops-cast-iron-1200.jpg"
+    },
+
+    "Louisiana Cajun Pasta": {
+        "ingredients": [
+            "Wheat", "Dairy", "Shrimp", "Red pepper"
+        ],
+        "image_url": "https://tonisrecipes.com/wp-content/uploads/2022/11/FullSizeRender-8-scaled-e1667904490887-1200x1200.jpg"
+    },
+
+    "Lomo Saltado": {
+        "ingredients": [
+            "Beef", "Tomato", "Onion", "Potato"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yLhDnoPUoJqDmeR9gtSfDA5vi9Jyx8tHnA&s"
+    },
+
+    "Mac and Cheese": {
+        "ingredients": [
+            "Wheat", "Dairy"
+        ],
+        "image_url": "https://www.lanascooking.com/wp-content/uploads/2023/11/classic-macaroni-and-cheese-1200-feature-1.jpg"
+    },
+
+    "Mahi Mahi": {
+        "ingredients": [
+            "Fish", "Lemon"
+        ],
+        "image_url": "https://hips.hearstapps.com/hmg-prod/images/mahi-mahi-index-64bebc3b62ea4.jpg?crop=0.502xw:1.00xh;0.189xw,0&resize=1200:*"
+    },
+
+    "Mango Chicken": {
+        "ingredients": [
+            "Chicken", "Mango", "Garlic"
+        ],
+        "image_url": "https://www.hwcmagazine.com/wp-content/uploads/2013/03/Grilled-Mango-Chicken-1200-x-1200-9058.jpg"
+    },
+
+    "Mapo Tofu": {
+        "ingredients": [
+            "Soy", "Beef", "Red pepper", "Garlic"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdr0Pp9orSzwJiGDDO9DN8oYS5caVc7LMtg&s"
+    },
+
+    "Margherita Pizza": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato"
+        ],
+        "image_url": "https://www.jessicagavin.com/wp-content/uploads/2019/08/skillet-margherita-pizza-12-1200.jpg"
+    },
+
+    "Mashed Potatoes": {
+        "ingredients": [
+            "Potato", "Dairy"
+        ],
+        "image_url": "https://kristineskitchenblog.com/wp-content/uploads/2021/05/mashed-potatoes-1200-square-0655.jpg"
+    },
+
+    "Meatballs": {
+        "ingredients": [
+            "Beef", "Eggs", "Wheat", "Onion"
+        ],
+        "image_url": "https://mycasualpantry.com/wp-content/uploads/2023/05/Italian-Meatballs-feat-1200-%C3%97-1200-px.jpg"
+    },
+
+    "Miso Soup": {
+        "ingredients": [
+            "Soy", "Fish"
+        ],
+        "image_url": "https://holisticchefacademy.com/wp-content/uploads/2021/10/miso-soup-1200-1200.jpg"
+    },
+
+    "Mole Chicken": {
+        "ingredients": [
+            "Chicken", "Cocoa", "Red pepper", "Garlic"
+        ],
+        "image_url": "https://www.chilipeppermadness.com/wp-content/uploads/2021/04/Chicken-Mole-Recipe1.jpg"
+    },
+
+    "Muffins": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy", "Blueberry"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2018/01/Basic-Banana-Muffins_EXPS_FT24_7708_0404_JR_1.jpg"
+    },
+
+"Nachos": {
+        "ingredients": [
+            "Corn", "Cheese", "Tomato", "Onion", "Beef"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2024/11/Skillet-Nachos_EXPS_TOHD24_133666_AlejandroMonfort_5.jpg"
+    },
+
+    "Nasi Goreng": {
+        "ingredients": [
+            "Rice", "Eggs", "Soy", "Chicken"
+        ],
+        "image_url": "https://www.chilipeppermadness.com/wp-content/uploads/2020/11/Nasi-Goreng-Indonesian-Fried-Rice-SQ.jpg"
+    },
+
+    "Noodles with Veggies": {
+        "ingredients": [
+            "Wheat", "Bell pepper", "Onion", "Carrot", "Soy"
+        ],
+        "image_url": "https://www.mygingergarlickitchen.com/wp-content/rich-markup-images/1x1/1x1-vegetable-teriyaki-noodles-video.jpg"
+    },
+
+    "N.Y. Cheesecake": {
+        "ingredients": [
+            "Dairy", "Eggs", "Wheat"
+        ],
+        "image_url": "https://butternutbakeryblog.com/wp-content/uploads/2021/05/new-york-style-cheesecake-square.jpg"
+    },
+
+    "Naan with Curry": {
+        "ingredients": [
+            "Wheat", "Dairy", "Curry powder"
+        ],
+        "image_url": "https://www.seasonsandsuppers.ca/wp-content/uploads/2025/11/easy-butter-chicken-1200-1.jpg"
+    },
+
+    "Nori Rolls": {
+        "ingredients": [
+            "Rice", "Fish", "Soy", "Avocado", "Cucumber"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Farchive%2Fc306518f0a0b9bde762b442283ea61cab6986f28"
+    },
+
+    "Navy Bean Soup": {
+        "ingredients": [
+            "Legumes", "Onion", "Carrot", "Celery"
+        ],
+        "image_url": "https://www.kitchentreaty.com/wp-content/uploads/2025/02/beansoup.jpg"
+    },
+
+    "Noodle Soup": {
+        "ingredients": [
+            "Wheat", "Chicken", "Carrot", "Onion", "Celery"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8s0gROTgNwF9SxYpQ4whDpIu89fz79GJPKw&s"
+    },
+
+    "Neapolitan Pizza": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato"
+        ],
+        "image_url": "https://cookingwithwineblog.com/wp-content/uploads/2023/12/Neapolitan-Pizza-Dough-Recipe-Featured-1.jpg"
+    },
+
+    "Oatmeal Bowl": {
+        "ingredients": [
+            "Oats", "Banana", "Blueberry"
+        ],
+        "image_url": "https://www.lanascooking.com/wp-content/uploads/2016/01/apple-pie-oatmeal-1200-feature-2.jpg"
+    },
+
+    "Okonomiyaki": {
+        "ingredients": [
+            "Wheat", "Eggs", "Cabbage", "Pork"
+        ],
+        "image_url": "https://www.spoonforkbacon.com/wp-content/uploads/2021/09/okonomiyaki-recipe-card.jpg"
+    },
+
+    "Omelette": {
+        "ingredients": [
+            "Eggs", "Cheese", "Tomato", "Onion", "Bell pepper"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2025/02/Baked-Omelette_EXPS_TOHD24_9221_AlejandroMonfort_5.jpg"
+    },
+
+    "Onion Soup": {
+        "ingredients": [
+            "Onion", "Dairy", "Wheat"
+        ],
+        "image_url": "https://www.familyfoodonthetable.com/wp-content/uploads/2025/01/French-onion-soup-square-1200.jpg"
+    },
+
+    "Orange Chicken": {
+        "ingredients": [
+            "Chicken", "Soy", "Garlic"
+        ],
+        "image_url": "https://carameltintedlife.com/wp-content/uploads/2021/11/orange-chicken.jpg"
+    },
+
+    "Orecchiette Pasta": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2021/OrecchietteKalePastawithSausage_9_1.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1699518936&s=0a238ba79a55d130b4d47f27eb07a2e4"
+    },
+
+    "Oyster Platter": {
+        "ingredients": [
+            "Shellfish"
+        ],
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuKs0MRjKsvnLdCV74NxuiRTOKmCeO9Brlug&s"
+    },
+
+    "Oxtail Stew": {
+        "ingredients": [
+            "Beef", "Carrot", "Onion", "Celery"
+        ],
+        "image_url": "https://www.gastrosenses.com/wp-content/uploads/2020/11/Instant-Pot-Oxtail-Stew-10.jpg"
+    },
+
+    "Olive Tapenade": {
+        "ingredients": [
+            "Olives", "Garlic"
+        ],
+        "image_url": "https://simplegreensmoothies.com/wp-content/uploads/best-green-olive-tapenade-recipe-toast.jpg"
+    },
+
+    "Open-Faced Sandwich": {
+        "ingredients": [
+            "Wheat", "Turkey", "Tomato", "Lettuce"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/0001/01/Open-Faced-Prosciutto-and-Egg-Sandwich_EXPS_TOHAM20_58152_E11_07_2b.jpg"
+    },
+
+"Pad Thai": {
+        "ingredients": [
+            "Rice", "Eggs", "Peanut", "Shrimp", "Soy"
+        ],
+        "image_url": "https://thai-foodie.com/wp-content/uploads/2025/09/beef-pad-thai.jpg"
+    },
+
+    "Paella": {
+        "ingredients": [
+            "Rice", "Shellfish", "Fish", "Chicken", "Tomato", "Peas"
+        ],
+        "image_url": "https://spanishsabores.com/wp-content/uploads/2024/01/Prawn-and-Chorizo-Paella-Featured-2.jpg"
+    },
+
+    "Pancakes": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy"
+        ],
+        "image_url": "https://cdn.loveandlemons.com/wp-content/uploads/2025/01/pancake-recipe.jpg"
+    },
+
+    "Panzanella Salad": {
+        "ingredients": [
+            "Wheat", "Tomato", "Onion", "Cucumber"
+        ],
+        "image_url": "https://joyfoodsunshine.com/wp-content/uploads/2022/06/panzanella-salad-recipe-4.jpg"
+    },
+
+    "Pasta Bolognese": {
+        "ingredients": [
+            "Wheat", "Tomato", "Beef", "Onion", "Garlic"
+        ],
+        "image_url": "https://feelgoodfoodie.net/wp-content/uploads/2023/04/Pasta-Bolognese-TIMG.jpg"
+    },
+
+    "Peanut Noodles": {
+        "ingredients": [
+            "Wheat", "Peanut", "Soy", "Garlic"
+        ],
+        "image_url": "https://www.noracooks.com/wp-content/uploads/2022/06/peanut-noodles-6.jpg"
+    },
+
+    "Pepperoni Pizza": {
+        "ingredients": [
+            "Wheat", "Dairy", "Tomato", "Pork"
+        ],
+        "image_url": "https://www.eatingonadime.com/wp-content/uploads/2024/08/200KB-Hot-Honey-Pepperoni-Pizza-12.jpg"
+    },
+
+    "Pho": {
+        "ingredients": [
+            "Rice", "Beef", "Onion", "Ginger"
+        ],
+        "image_url": "https://takestwoeggs.com/wp-content/uploads/2022/11/Pho%CC%9B%CC%89-Ga-Vietnamese-Chicken-Pho-Soup-Takestwoeggs-Final-Photography-sq.jpg"
+    },
+
+    "Pita Wrap": {
+        "ingredients": [
+            "Wheat", "Chicken", "Tomato", "Lettuce", "Onion"
+        ],
+        "image_url": "https://mycasualpantry.com/wp-content/uploads/2021/01/Pita-Wrap-with-Hummus-and-Veggies-featured.jpg"
+    },
+
+    "Poke Bowl": {
+        "ingredients": [
+            "Fish", "Rice", "Avocado", "Soy"
+        ],
+        "image_url": "https://www.worldofvegan.com/wp-content/uploads/2025/03/vegan-poke-bowl-square-feature.jpg"
+    },
+
+    "Popcorn Chicken": {
+        "ingredients": [
+            "Chicken", "Wheat"
+        ],
+        "image_url": "https://thebigmansworld.com/wp-content/uploads/2024/02/popcorn-chicken-recipe.jpg"
+    },
+
+    "Pork Chops": {
+        "ingredients": [
+            "Pork", "Garlic"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2024/02/Baked-Pork-Chops_EXPS_TOHcomDC23_273632_P2_MD_06_22_5b.jpg"
+    },
+
+    "Potato Gratin": {
+        "ingredients": [
+            "Potato", "Dairy"
+        ],
+        "image_url": "https://www.foodandwine.com/thmb/_-Sw7frOY_INY_voU_tDjysnqPw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/201209-xl-healthy-potato-gratin-with-herbs-9bd19d9fdc994476ab67479c58ada779.jpg"
+    },
+
+    "Pozole": {
+        "ingredients": [
+            "Pork", "Hominy (Corn)", "Onion", "Red pepper"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2025-01-pozole%2Fpozole-121"
+    },
+
+    "Pulled Pork Sandwich": {
+        "ingredients": [
+            "Wheat", "Pork", "Tomato"
+        ],
+        "image_url": "https://thebustedoven.com/wp-content/uploads/2021/09/Instant-Pot-Pulled-Pork-18-of-21.jpg"
+    },
+
+    "Pumpkin Soup": {
+        "ingredients": [
+            "Pumpkin", "Onion", "Dairy"
+        ],
+        "image_url": "https://www.thevegspace.co.uk/wp-content/uploads/2020/10/FV-Insta.jpg"
+    },
+
+    "Pesto Pasta": {
+        "ingredients": [
+            "Wheat", "Dairy", "Garlic", "Pine nuts"
+        ],
+        "image_url": "https://platein28.com/wp-content/uploads/2022/05/pesto-pasta-with-veggies-final-2.jpg"
+    },
+
+    "Pierogi": {
+        "ingredients": [
+            "Wheat", "Dairy", "Potato"
+        ],
+        "image_url": "https://www.everydayhealthyrecipes.com/wp-content/uploads/2017/12/potato-cheese-pierogi-ruskie1.jpg"
+    },
+
+    "Pita and Hummus": {
+        "ingredients": [
+            "Wheat", "Legumes", "Garlic", "Sesame"
+        ],
+        "image_url": "https://mycasualpantry.com/wp-content/uploads/2021/01/Pita-Wrap-with-Hummus-and-Veggies-featured.jpg"
+    },
+
+    "Pancit": {
+        "ingredients": [
+            "Wheat", "Chicken", "Soy", "Carrot", "Onion"
+        ],
+        "image_url": "https://www.billyparisi.com/wp-content/uploads/2025/04/pancit-2.jpg"
+    },
+
+"Quesadilla": {
+        "ingredients": [
+            "Wheat", "Dairy", "Chicken"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2024/ChickenQuesadilla_10.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1727916151&s=8c4345e03b0e26f3a1c5f8e14f85ce24"
+    },
+
+    "Quiche": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy", "Spinach"
+        ],
+        "image_url": "https://lilluna.com/wp-content/uploads/2025/05/best-quiche-recipe-resize-16.jpg"
+    },
+
+    "Quinoa Bowl": {
+        "ingredients": [
+            "Quinoa", "Tomato", "Cucumber", "Avocado"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2020/QuinoaBowl_4.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1737605526&s=b91b6baac05eb76bd048a76d12f4a9cd"
+    },
+
+    "Queso Dip": {
+        "ingredients": [
+            "Dairy"
+        ],
+        "image_url": "https://www.lemontreedwelling.com/wp-content/uploads/2020/08/queso-dip-featured.jpg"
+    },
+
+    "Quinoa Salad": {
+        "ingredients": [
+            "Quinoa", "Tomato", "Cucumber", "Onion"
+        ],
+        "image_url": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2019-11-recipe-mediterranean-quinoa-salad%2F2019-10-21_Kitchn89095_Mediteranean-Quinoa-Salad_aa41b0_landscape"
+    },
+
+    "Ramen": {
+        "ingredients": [
+            "Wheat", "Eggs", "Soy", "Fish"
+        ],
+        "image_url": "https://images.themodernproper.com/production/posts/2022/EasyCurryRamen-_7.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1747762318&s=803d88962aaa9940c70fcbc93ec1de87"
+    },
+
+    "Ratatouille": {
+        "ingredients": [
+            "Tomato", "Eggplant", "Bell pepper", "Onion"
+        ],
+        "image_url": "https://yellowchilis.com/wp-content/uploads/2024/10/ratatouille.jpg"
+    },
+
+    "Ravioli": {
+        "ingredients": [
+            "Wheat", "Eggs", "Dairy"
+        ],
+        "image_url": "https://thesageapron.com/wp-content/uploads/2023/04/Spinach-Ricotta-Ravioli-45.jpg"
+    },
+
+    "Red Curry": {
+        "ingredients": [
+            "Coconut", "Chicken", "Red pepper", "Garlic", "Ginger"
+        ],
+        "image_url": "https://inquiringchef.com/wp-content/uploads/2020/01/Thai-Chicken-Red-Curry_square-4532.jpg"
+    },
+
+    "Reuben Sandwich": {
+        "ingredients": [
+            "Wheat", "Beef", "Dairy"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2018/01/Reuben-Sandwiches_EXPS_TOHVP24_601_MF_01_11_ReubenSandwiches_1.jpg"
+    },
+
+    "Rice and Beans": {
+        "ingredients": [
+            "Rice", "Legumes", "Onion"
+        ],
+        "image_url": "https://at-my-table.com/wp-content/uploads/2024/01/Brazilian-Rice-and-Beans-16-of-16.jpg"
+    },
+
+    "Risotto": {
+        "ingredients": [
+            "Rice", "Dairy", "Onion"
+        ],
+        "image_url": "https://www.connoisseurusveg.com/wp-content/uploads/2025/06/tomato-risotto-sq.jpg"
+    },
+
+    "Roast Beef": {
+        "ingredients": [
+            "Beef", "Garlic"
+        ],
+        "image_url": "https://www.tasteofhome.com/wp-content/uploads/2025/01/Herb-Crusted-Roast-Beef_EXPS_FT25_9187_EC_0108_1.jpg"
+    },
+
+    "Roasted Chicken": {
+        "ingredients": [
+            "Chicken", "Garlic", "Onion"
+        ],
+        "image_url": "https://feelgoodfoodie.net/wp-content/uploads/2024/12/Roasted-Chicken-Garlic-Herbs-06.jpg"
+    },
+
+    "Roti Curry": {
+        "ingredients": [
+            "Wheat", "Chicken", "Curry powder"
+        ],
+        "image_url": "https://www.orchidsandsweettea.com/wp-content/uploads/2024/05/Curry-Chicken-Roti.jpg"
+    },
+
+    "Salmon Bowl": {
+        "ingredients": [
+            "Fish", "Rice", "Avocado", "Soy"
+        ],
+        "image_url": "https://thebigmansworld.com/wp-content/uploads/2024/01/salmon-rice-bowl-recipe.jpg"
+    },
+
+    "Samosa": {
+        "ingredients": [
+            "Wheat", "Potato", "Peas"
+        ],
+        "image_url": "https://www.cherryonmysundae.com/wp-content/uploads/2020/06/mexican-samosas24935-feature.jpg"
+    },
+
+    "Sandwich Platter": {
+        "ingredients": [
+            "Wheat", "Turkey", "Tomato", "Lettuce"
+        ],
+        "image_url": "https://www.oliversmarket.com/wp-content/uploads/2022/10/Finger-Sandwich-Platter.jpg"
+    },
+
+    "Shrimp Scampi": {
+        "ingredients": [
+            "Shellfish", "Garlic", "Dairy"
+        ],
+        "image_url": "https://littlespoonfarm.com/wp-content/uploads/2024/07/Shrimp-Scampi-Recipe-photo-1.jpg"
+    },
+
+    "Steak Dinner": {
+        "ingredients": [
+            "Beef", "Garlic", "Potato"
+        ],
+        "image_url": "https://www.centercutcook.com/wp-content/uploads/2016/05/grilled-steak-with-compound-butter-2.jpg"
+    }
+}
+
+
+with open("foods.json", "w") as f:
+    json.dump(recipes, f, indent=4)
