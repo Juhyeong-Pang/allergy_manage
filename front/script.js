@@ -291,3 +291,20 @@ async function fetchJSONData(filePath) {
     console.error('Failed to fetch JSON data:', error);
   }
 }
+
+const allergySearch = document.getElementById("allergySearch");
+const allergyList = document.querySelectorAll(".allergy-list label");
+
+allergySearch.addEventListener("input", () => {
+    const keyword = allergySearch.value.toLowerCase();
+
+    allergyList.forEach(label => {
+        const text = label.textContent.toLowerCase();
+
+        if (text.includes(keyword)) {
+            label.style.display = "flex";  // 보이기
+        } else {
+            label.style.display = "none";  // 숨기기
+        }
+    });
+});
