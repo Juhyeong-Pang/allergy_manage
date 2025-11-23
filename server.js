@@ -3,21 +3,24 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const mysql = require("mysql2/promise");
+const fs = require("fs");
 require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(express.static("front"));
 
-
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,       // e.g., 'your-db-host.aivencloud.com'
-  user: process.env.DB_USER,       // your DB username
-  password: process.env.DB_PASSWORD, // your DB password
-  database: process.env.DB_NAME,   // the database name you created
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  ssl: {
+    ca: fs.readFileSync("./ca.pem")   // ⭐ REQUIRED for Aiven
+  }
 });
 
 (async () => {
