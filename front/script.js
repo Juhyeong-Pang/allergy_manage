@@ -98,7 +98,7 @@ saveBtn.addEventListener("click", async () => {
   modal.style.display = "none";
 
   await renderMembers();
-  await updateActiveTab();   // <-- refresh allergies tab
+  await updateActiveTab();
 });
 
 async function loadMembers() {
@@ -139,6 +139,7 @@ async function clearDatabase() {
 
     // Refresh the members list from the database
     await renderMembers();
+    await updateActiveTab()
   } catch (err) {
     console.error("데이터베이스 초기화 실패:", err);
   }
