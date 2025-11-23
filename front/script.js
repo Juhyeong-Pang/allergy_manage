@@ -53,8 +53,15 @@ async function renderMembers() {
   members.forEach((m, i) => {
     const div = document.createElement("div");
     div.classList.add("member-card");
-    div.innerHTML = `<strong class="member-name">${m.name}</strong><br>
-    <span class="member-allergy">${m.allergies.join(", ")}</span>`;
+    if (m.name == "") {
+      div.innerHTML = `<div id="member-name-container"><strong class="member-name">Someone</strong></div><br>
+     <div id="member-allergies-container"><span class="member-allergy">${m.allergies.join(", ")}</span></div>`;
+    } else if (m.allergies == "") {
+      div.innerHTML = `<div id="member-name-container"><strong class="member-name">${m.name}</strong></div>`;
+    } else {
+      div.innerHTML = `<div id="member-name-container"><strong class="member-name">${m.name}</strong></div><br>
+      <div id="member-allergies-container"><span class="member-allergy">${m.allergies.join(", ")}</span></div>`;
+    }
     div.onclick = () => {
       editingIndex = i;
       openModal(m);
@@ -292,18 +299,33 @@ async function fetchJSONData(filePath) {
 }
 
 const allergySearch = document.getElementById("allergySearch");
-const allergyList = document.querySelectorAll(".allergy-list label");
+const allergyListContainer = document.querySelector(".allergy-list");
 
 allergySearch.addEventListener("input", () => {
-    const keyword = allergySearch.value.toLowerCase();
-
-    allergyList.forEach(label => {
-        const text = label.textContent.toLowerCase();
-
-        if (text.includes(keyword)) {
-            label.style.display = "flex";  // 보이기
-        } else {
-            label.style.display = "none";  // 숨기기
-        }
-    });
+    allergyListContainer.innerHTML = updateAllergyListPopup(allergySearch.value);
 });
+
+const allergies = [
+      "Additives", "Apple", "Avocado", "Banana", "Beef", "Bell pepper",
+      "Blueberry", "Carrot", "Celery", "Chia seeds", "Chicken", "Chili powder",
+      "Cinnamon", "Citrus fruits", "Cocoa", "Coconut", "Corn", "Coriander",
+      "Curry powder", "Dairy", "Eggs", "Fish", "Flaxseed", "Garlic", "Ginger",
+      "Gluten", "Grapes", "Kiwi", "Latex-fruit cross allergens", "Legumes",
+      "Mango", "Melon", "Mushroom", "Mustard", "Nutmeg", "Onion", "Papaya",
+      "Paprika", "Peach", "Peanut", "Pineapple", "Plum", "Poppy seeds", "Pork",
+      "Potato", "Preservatives", "Pumpkin seeds", "Raspberry", "Red pepper",
+      "Rice", "Sesame", "Shellfish", "Soy", "Spinach", "Strawberry",
+      "Sunflower seeds", "Tomato", "Tree Nuts", "Turkey", "Turmeric", "Wheat"
+];
+
+function updateAllergyListPopup(searchKeyword = "") {
+
+    // Lowercase the keyword for case-insensitive search
+    const keyword = searchKeyword.toLowerCase();
+
+    // Filter the allergies based on the keyword
+    const filtered = allergies.filter(a => a.toLowerCase().includes(keyword));
+
+    // Return HTML string with <label><input> ... </label><br>
+    return filtered.map(a => `<label><input type="checkbox" value="${a}"> ${a}</label><br>`).join("");
+}
