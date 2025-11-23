@@ -46,26 +46,25 @@ async function renderMembers() {
   const container = document.getElementById("member-container");
   container.innerHTML = "";
 
-  if (editingIndex == null) {
-    members = await loadMembers();
-  }
+  members = await loadMembers(); // always fetch latest
 
   members.forEach((m, i) => {
     const div = document.createElement("div");
     div.classList.add("member-card");
-    if (m.name == "") {
-      div.innerHTML = `<div id="member-name-container"><strong class="member-name">Someone</strong></div><br>
-     <div id="member-allergies-container"><span class="member-allergy">${m.allergies.join(", ")}</span></div>`;
-    } else if (m.allergies == "") {
-      div.innerHTML = `<div id="member-name-container"><strong class="member-name">${m.name}</strong></div>`;
-    } else {
-      div.innerHTML = `<div id="member-name-container"><strong class="member-name">${m.name}</strong></div><br>
-      <div id="member-allergies-container"><span class="member-allergy">${m.allergies.join(", ")}</span></div>`;
-    }
+
+    const allergiesText = m.allergies && m.allergies.length
+      ? `<br><div id="member-allergies-container"><span class="member-allergy">${m.allergies.join(", ")}</span></div>`
+      : "";
+
+    const nameText = m.name ? m.name : "Someone";
+
+    div.innerHTML = `<div id="member-name-container"><strong class="member-name">${nameText}</strong></div>${allergiesText}`;
+
     div.onclick = () => {
       editingIndex = i;
-      openModal(m);
+      openModal(m); // opens modal with current name + allergies
     };
+
     container.appendChild(div);
   });
 }
@@ -94,15 +93,22 @@ async function addPerson(data) {
 }
 
 saveBtn.addEventListener("click", async () => {
-  const name = nameInput.value;
+  const name = nameInput.value.trim();
   const allergies = Array.from(document.querySelectorAll(".allergy-list input"))
     .filter(el => el.checked)
     .map(el => el.value);
 
   const data = { name, allergies };
 
-  await addPerson(data);
+  if (editingIndex === null) {
+    await addPerson(data);
+  } else {
+    // Update existing member
+    members[editingIndex] = data;
+  }
+
   modal.style.display = "none";
+  editingIndex = null;
 
   await renderMembers();
   await updateActiveTab();
@@ -113,19 +119,16 @@ async function loadMembers() {
     const res = await fetch("/people");
     if (!res.ok) throw new Error("Failed to fetch people");
 
-    let dataList = [];
     const people = await res.json();
-    people.forEach((row) => {
-      const name = row["name"];
-      const allergies = row["allergies"];
-      const data = { name, allergies };
-      dataList.push(data);
-    });
-    return dataList;
+    return people.map(row => ({
+      id: row.id,           // make sure your DB returns this
+      name: row.name,
+      allergies: row.allergies || []
+    }));
 
   } catch (err) {
-    console.error("데이터 불러오기 실패:", err);
-    return []; // return empty array on failure
+    console.error("Failed to load members:", err);
+    return [];
   }
 }
 
