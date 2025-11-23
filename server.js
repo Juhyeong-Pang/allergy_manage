@@ -77,4 +77,5 @@ app.delete("/clearPeople", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const serverless = require('serverless-http');
+module.exports.handler = serverless(app);
